@@ -11,6 +11,10 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'com.github.monkeywie', name: 'proxyee', version: '1.4.1'
+    implementation group: 'org.json', name: 'json', version: '20180813'
+    implementation group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+    implementation group: 'com.tagtraum', name: 'casampledsp-complete', version: '0.9.25'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.18'
     annotationProcessor "org.projectlombok:lombok:1.18.18"
