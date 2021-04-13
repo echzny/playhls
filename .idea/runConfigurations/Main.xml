@@ -4,7 +4,7 @@
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="MAIN_CLASS_NAME" value="com.echzny.playhls.PlayHLS" />
     <module name="playhls.main" />
-    <option name="PROGRAM_PARAMETERS" value="--illegal-access=warn" />
+    <option name="VM_PARAMETERS" value="--add-opens java.base/jdk.internal.misc=ALL-UNNAMED" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

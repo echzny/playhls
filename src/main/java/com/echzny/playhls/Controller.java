@@ -16,11 +16,6 @@ import java.util.Objects;
 
 @Slf4j
 public class Controller {
-  //private static final String SAMPLE_HLS_URL =
-  //    "https://radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master.m3u8";
-  //private static final String SAMPLE_HLS_URL = "ff-16b-2c-44100hz.m4a";
-  private static final String SAMPLE_HLS_URL =
-      "http://f-radiko.smartstream.ne.jp/TBS/_definst_/simul-stream.stream/playlist.m3u8";
   @FXML
   protected BorderPane borderPane;
   @FXML
@@ -54,13 +49,17 @@ public class Controller {
               if (Objects.nonNull(newValue)) {
                 val proxy = PlayHLS.getRadioProxySelector();
                 proxy.setRadikoToken(radiko.getClient().getAuths().getToken());
-
-                val media = new Media(SAMPLE_HLS_URL);
+                val media = new Media(Config.HLS_URL);
 
                 player = new MediaPlayer(media);
                 view = new MediaView(player);
                 borderPane.setCenter(view);
                 player.play();
+                media.onErrorProperty().addListener((observable1, oldValue1, newValue1) -> {
+                  if (Objects.nonNull(newValue) && oldValue != newValue) {
+                    log.error(newValue.toString());
+                  }
+                });
                 button.setText("Pause");
               } else {
                 button.setText("Play");

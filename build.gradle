@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.github.monkeywie', name: 'proxyee', version: '1.4.1'
+    implementation group: 'org.littleshoot', name: 'littleproxy', version: '1.1.2'
     implementation group: 'org.json', name: 'json', version: '20180813'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
     implementation group: 'com.tagtraum', name: 'casampledsp-complete', version: '0.9.25'
