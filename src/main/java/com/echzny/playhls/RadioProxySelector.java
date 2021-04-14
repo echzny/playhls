@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @Slf4j
@@ -32,10 +33,20 @@ public class RadioProxySelector extends ProxySelector {
                 return new HttpFiltersAdapter(originalRequest) {
                   @Override
                   public HttpResponse clientToProxyRequest(HttpObject httpObject) {
+                    String uri = null;
+                    if (httpObject instanceof HttpRequest) {
+                      uri = ((HttpRequest) httpObject).getUri();
+                    }
                     if (httpObject instanceof HttpMessage) {
-                      log.info("update header");
                       HttpHeaders headers = ((HttpMessage)httpObject).headers();
                       headers.set("Accept", "*/*");
+                      headers.set("Range", "bytes=0-");
+                      if (Objects.nonNull(uri) && uri.endsWith("playlist.m3u8")) {
+                        headers.set("Connection", "close");
+                      } else {
+                        headers.set("Connection", "keep-alive");
+                      }
+                      headers.add("Icy-MetaData", "1");
                       headers.add("X-Radiko-AuthToken", radikoToken);
                     }
 
